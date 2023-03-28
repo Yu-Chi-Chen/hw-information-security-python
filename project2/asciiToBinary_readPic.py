@@ -10,4 +10,3 @@ for i_vertical in range (image.height):
     print(*line_horizon)
 
 image.close()
-print((line_horizon))

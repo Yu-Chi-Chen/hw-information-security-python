@@ -14,7 +14,7 @@ except IOError:
 finally:
      f.close()
 
-## change ascii(decimal) to binary
+## change ascii(decimal) to binary for single char
 def decimalToBinary(c:string):
     num=ord(c)
     divisor=0
@@ -44,17 +44,18 @@ def decimalToBinary(c:string):
         arrList.insert(0,0)
     ## end while
 
-    path='project2\Output.txt'
-    f=open(path,'a')
-    for i in range(0,len(arrList)):
-        print(arrList[i],end="",file=f)
-
-    f.close()
+    return arrList
+##end define
     
-
+tempList=list()
+path='project2\Output.txt'
+f=open(path,'a')
 for i in range(0,len(contList)):
-  decimalToBinary(contList[i])
+  tempList=decimalToBinary(contList[i])
+  for j in range(0,len(tempList)):
+     print(tempList[j],end="",file=f)
 ## end for
+f.close()
 
 ##-----------start to turn output file into origin file-----------------
 f=None
