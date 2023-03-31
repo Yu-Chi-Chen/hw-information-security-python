@@ -44,6 +44,9 @@ def decimalToBinary(c:string):
         arrList.insert(0,0)
     ## end while
 
+    if __name__=='_main_':
+        return arrList
+    
     return arrList
 ##end define
     
