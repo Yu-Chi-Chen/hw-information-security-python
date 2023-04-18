@@ -1,7 +1,7 @@
 from def_decimalToBinary_int import decimalToBinary
 from PIL import Image
 import numpy as np
-import math
+import PIL
 
 '''
 ##open picture
@@ -12,32 +12,33 @@ path=
 '''
 
 with Image.open("project2/Img_File.bmp") as img:
-    img=img.convert('L')
-    img_array = np.array(img) #create two dimension matrix
-    #img_matrix=img_array.tolist() 
-#close image
-f=open("project2/Output_BMP_binary.txt",'a')
-i_vertical,i_horizon=img_array.shape
-line_horizon=list()
-imageList=list()
-line=list()
-for vertical in range (0,i_vertical):
-    for horizon in range(0,i_horizon):
-        pixelData=img_array[vertical,horizon]
-        dataBinary=decimalToBinary(pixelData)
+    img = img.convert('L')
+    img_array = np.array(img)  # create two dimension matrix
+    # img_matrix=img_array.tolist()
+# close image
+f = open("project2/Output_BMP_binary.txt", 'w')
+i_vertical, i_horizon = img_array.shape
+line_horizon = list()
+imageList = list()
+line = list()
+
+for vertical in range(0, i_vertical):
+    for horizon in range(0, i_horizon):
+        pixelData = img_array[vertical, horizon]
+        dataBinary = decimalToBinary(pixelData)
         for element in dataBinary:
-            print(element,end="",file=f)
-        #end for
-    #end for
-#end for
+            print(element, end='', file=f)
+        # end for
+    # end for
+# end for
 f.close()
 
 
 '''    for horizon in range(line):
         str="".join(decimalToBinary(str(line[vertical])))
         print(str,end="")'''
-    #end for
-#end for
+# end for
+# end for
 
 '''
 for i_vertical in range (image.height):
@@ -72,20 +73,24 @@ for i in range(0,len(toBinList)):
 '''
 
 # convert output bmp binary file into initial bmp file
-path="project2\Output_BMP_binary.txt"
-with open(path,'r') as f:
-    bmpBinary=f.read
+path = "project2/Output_BMP_binary.txt"
+with open(path, 'r') as f:
+    bmpBinary = f.read()
 
-str="".join(bmpBinary)
-bmpBinary=list()
+str = "".join(bmpBinary)
+bmpBinary = list()
+
 for c in str:
-     num=int(c)
-     bmpBinary.append(c)
-#end for
+    num = int(c)
+    bmpBinary.append(num)
+# end for
 
-num=int(0)
-#此時bmpBinary已經儲存圖片二進制
-f=open("project2\Output_image.bmp",'w',encoding='UTF-8')
+num = int(0)
+# 此時bmpBinary已經儲存圖片二進制
+arr = np.asarray(bmpBinary)
+OutputImg = PIL.Image.fromarray(np.uint8(arr))
+OutputImg.save("Output_image.bmp")
+# f=open("project2\Output_image.bmp",'w')
 '''
 for i in range(0,len(bmpBinary),8):
         j=int(0)
@@ -99,7 +104,7 @@ for i in range(0,len(bmpBinary),8):
         print(chr(sum),end="",file=f)
      ##end for
 '''
-
+'''
 new_data = []
 for i in range(0, len(bmpBinary), 8):
     new_data.append(bmpBinary[i:i+8])  # 8 digit binary list
@@ -109,7 +114,4 @@ for i in new_data:
 a= bytearray(int_data)
 f.write(a)
 f.close()  
-
-
-
-
+'''
