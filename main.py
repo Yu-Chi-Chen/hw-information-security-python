@@ -1,6 +1,0 @@
-f = open("https://replit.com/@Yu-Chi-Chen/hwithinformation-security-python#project2/test.txt", "r")
-content = f.read()
-print("start to read")
-print(content)
-print("End of Read file.")
-f.close()
